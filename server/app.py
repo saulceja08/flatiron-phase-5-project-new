@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+#Remember to export FLASK_RUN_PORT=5555 // export FLASK_APP=server/app.py
+
 # Standard library imports
 
 # Remote library imports
@@ -15,7 +17,7 @@ from config import app, db, api
 
 @app.route('/')
 def index():
-    return '<h1>Project Server</h1>'
+    return '<h1>Project Test practice server</h1>'
 
 
 if __name__ == '__main__':
