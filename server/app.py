@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 #Remember to export FLASK_RUN_PORT=5555 // export FLASK_APP=server/app.py
+#pipenv install && pipenv shell || python server/app.py || npm start --prefix client
 
 # Standard library imports
 
@@ -21,5 +22,5 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run(port=5555, debug=True)
+    app.run()
 
