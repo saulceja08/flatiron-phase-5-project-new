@@ -8,6 +8,7 @@
 # Remote library imports
 from flask import request
 from flask_restful import Resource
+from flask import Flask, render_template
 
 # Local imports
 from config import app, db, api
@@ -15,14 +16,15 @@ from config import app, db, api
 
 
 # Views go here!
+app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return '<h1>Home Page</h1>'
+    return render_template('home.html') #, posts = posts
 
 @app.route('/about')
 def about():
-    return '<h1>About Page</h1>'
+    return render_template('about.html')
 
 
 if __name__ == '__main__':
