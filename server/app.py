@@ -17,10 +17,14 @@ from config import app, db, api
 # Views go here!
 
 @app.route('/')
-def index():
-    return '<h1>Project Test practice server</h1>'
+def home():
+    return '<h1>Home Page</h1>'
+
+@app.route('/about')
+def about():
+    return '<h1>About Page</h1>'
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
 
