@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App Home Page</title>
-</head>
-<body>
-    <h1>Home Page: Default</h1>
-    {% for post in posts %}
-    <h1>{{ post.author }}</h1>
-    <h1>{{ post.content }}</h1>
+{% extends "layout.html" %}
+
+{% block content %}
+    {% for test in tests %}
+    <h1>{{ test.gamer }}</h1>
+    <p>Video Game: {{ test.video_game }}</p>
+    <p>Summary: {{ test.content }}</p>
+    <p> {{ test.date_posted }} </p>
     {% endfor %}
-</body>
-</html>
+{% endblock content %}
