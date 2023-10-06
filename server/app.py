@@ -8,7 +8,7 @@
 # Remote library imports
 from flask import request
 from flask_restful import Resource
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for
 
 # Local imports
 from config import app, db, api
@@ -18,13 +18,41 @@ from config import app, db, api
 # Views go here!
 app = Flask(__name__)
 
+tests = [
+    {
+        'gamer': 'Saul Ceja',
+        'video_game': 'Call of Duty: MW3',
+        'content': 'Acheived veteran rank!',
+        'date_posted': 'October 3, 2023'
+    },
+    {
+        'gamer': 'Eder Macias',
+        'video_game': 'Call of Duty: MW3',
+        'content': 'Acheived a 15 kill streak',
+        'date_posted': 'October 4, 2023'
+    },
+    {
+        'gamer': 'Bryant Urenda',
+        'video_game': 'Call of Duty: MW3',
+        'content': 'Acheived 3 blood thirsties in 5 minutes',
+        'date_posted': 'October 4, 2023'
+    },
+    {
+        'gamer': 'Guillermo Ceja',
+        'video_game': 'Call of Duty: MW3',
+        'content': 'Acheived level 100 in Zombies solo',
+        'date_posted': 'October 2, 2023'
+    }
+]
+
 @app.route('/')
+@app.route('/home')
 def home():
-    return render_template('home.html') #, posts = posts
+    return render_template('home.html', tests=tests, title='Game Home Page') 
 
 @app.route('/about')
 def about():
-    return render_template('about.html')
+    return render_template('about.html', tests=tests, title='Gaming About Page')
 
 
 if __name__ == '__main__':
