@@ -2,9 +2,15 @@
 
 {% block content %}
     {% for test in tests %}
-    <h1>{{ test.gamer }}</h1>
-    <p>Video Game: {{ test.video_game }}</p>
-    <p>Summary: {{ test.content }}</p>
-    <p> {{ test.date_posted }} </p>
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">{{ test.gamer }}</a>
+              <small class="text-muted">{{ test.date_posted }}</small>
+            </div>
+            <h4><a class="article-title" href="#">{{ test.content }}</a></h4>
+            <p><a class="article-content" href="#">{{ test.video_game }}</a></p>
+          </div>
+        </article>
     {% endfor %}
 {% endblock content %}
