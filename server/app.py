@@ -9,6 +9,7 @@
 from flask import request
 from flask_restful import Resource
 from flask import Flask, render_template, url_for
+from forms import RegisterUserForm, LoginUseForm
 
 # Local imports
 from config import app, db, api
@@ -17,6 +18,7 @@ from config import app, db, api
 
 # Views go here!
 app = Flask(__name__)
+app.config['SECRET_KEY'] = '1b4c68cff7ac17414ad4fd0b'
 
 tests = [
     {
@@ -53,6 +55,16 @@ def home():
 @app.route('/about')
 def about():
     return render_template('about.html', tests=tests, title='Gaming About Page')
+
+@app.route('/registration')
+def registration():
+    form = RegisterUserForm()
+    return render_template('registration.html', title='Registration', form=form)
+
+@app.route('/login')
+def login():
+    form = LoginUseForm
+    return render_template('login.html', title='Login', form=form)
 
 
 if __name__ == '__main__':
