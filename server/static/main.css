@@ -40,15 +40,15 @@ body::after {
   }
   
   .content-section {
-    background: #ffffff; /*  */
+    background: black; /*content background color */
     padding: 10px 20px;
-    border: 1px solid #dddddd; /*  */
+    border: 1px solid #8a9c78; /* card border colors */
     border-radius: 3px;
     margin-bottom: 20px;
   }
   
   .article-title {
-    color: #444444; /*  */
+    color: white; /* card title text color */
   }
   
   a.article-title:hover {

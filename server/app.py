@@ -8,6 +8,7 @@
 # Remote library imports
 from flask import request, flash, redirect
 from flask_restful import Resource
+from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, render_template, url_for
 from forms import RegisterUserForm, LoginUseForm
 
@@ -19,6 +20,7 @@ from config import app, db, api
 # Views go here!
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '1b4c68cff7ac17414ad4fd0b'
+app.config['SQLAlchemy_DATABASE_URI'] = 'sqlite:///site.db'
 
 tests = [
     {
@@ -49,7 +51,7 @@ tests = [
 
 @app.route('/')
 @app.route('/home')
-def home():
+def home_page():
     return render_template('home.html', tests=tests, title='Game Home Page') 
 
 @app.route('/about')
@@ -61,7 +63,7 @@ def registration():
     form = RegisterUserForm()
     if form.validate_on_submit():
         flash(f'Account created for {form.username.data}!', 'success')
-        return redirect(url_for('home'))
+        return redirect(url_for('home_page'))
     return render_template('registration.html', title='Registration', form=form)
 
 @app.route('/login')
