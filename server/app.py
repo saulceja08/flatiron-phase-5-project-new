@@ -6,7 +6,7 @@
 # Standard library imports
 
 # Remote library imports
-from flask import request
+from flask import request, flash, redirect
 from flask_restful import Resource
 from flask import Flask, render_template, url_for
 from forms import RegisterUserForm, LoginUseForm
@@ -56,9 +56,12 @@ def home():
 def about():
     return render_template('about.html', tests=tests, title='Gaming About Page')
 
-@app.route('/registration')
+@app.route('/registration', methods=['GET', 'POST'])
 def registration():
     form = RegisterUserForm()
+    if form.validate_on_submit():
+        flash(f'Account created for {form.username.data}!', 'success')
+        return redirect(url_for('home'))
     return render_template('registration.html', title='Registration', form=form)
 
 @app.route('/login')
