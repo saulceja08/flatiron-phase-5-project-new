@@ -22,6 +22,8 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = '1b4c68cff7ac17414ad4fd0b'
 app.config['SQLAlchemy_DATABASE_URI'] = 'sqlite:///site.db'
 
+database = SQLAlchemy(app)
+
 tests = [
     {
         'gamer': 'Saul Ceja',
