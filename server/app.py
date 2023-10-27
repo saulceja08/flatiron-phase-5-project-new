@@ -9,6 +9,7 @@
 from flask import request, flash, redirect
 from flask_restful import Resource
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 from flask import Flask, render_template, url_for
 from forms import RegisterUserForm, LoginUseForm
 
@@ -20,9 +21,29 @@ from config import app, db, api
 # Views go here!
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '1b4c68cff7ac17414ad4fd0b'
-app.config['SQLAlchemy_DATABASE_URI'] = 'sqlite:///site.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 
-database = SQLAlchemy(app)
+db = SQLAlchemy(app)
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(25), nullable=False, unique=True)
+    email = db.Column(db.String(45), nullable=False, unique=True)
+    password = db.Column(db.String(25), nullable=False)
+    posts = db.relationship('Post', backref='gamer', lazy=True) #lazy
+
+    def __repr__(self):
+        return f"User Info:('{self.username}', '{self.email}')"
+
+class Post(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    gamer_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    title = db.Column(db.String(40), nullable=False)
+    content= db.Column(db.Text, nullable=False)
+    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+    def __repr__(self):
+        return f"Post Info:('{self.title}', '{self.date_posted}', '{self.content}')"
 
 tests = [
     {
@@ -46,7 +67,7 @@ tests = [
     {
         'gamer': 'Guillermo Ceja',
         'video_game': 'Call of Duty: MW3',
-        'content': 'Acheived level 100 in Zombies solo',
+        'content': 'Acheived level 100 in Zombies solo',                   
         'date_posted': 'October 2, 2023'
     }
 ]
